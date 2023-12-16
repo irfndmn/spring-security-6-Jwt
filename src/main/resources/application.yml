@@ -1,0 +1,30 @@
+
+server:
+  error:
+    include-binding-errors: always
+    include-message: always
+    include-stacktrace: never
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/security
+    username: dev_user
+    password: password
+  jpa:
+    hibernate:
+     ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+backendapi:
+  app:
+    jwtSecret: YWRkdmFzdGRlcGVuZHJvYXJuZXdzb3VnaHRjaXJjbGVmbHl3aGljaHdhdGNoZHVlY28=
+    jwtExpressionMS: 86400000
+
+
+root:
+  user:
+    password: 12345678
