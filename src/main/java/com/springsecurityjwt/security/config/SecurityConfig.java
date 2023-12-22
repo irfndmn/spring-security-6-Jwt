@@ -1,6 +1,7 @@
 package com.springsecurityjwt.security.config;
 
 
+import com.springsecurityjwt.security.jwt.AuthEntryPointJwt;
 import com.springsecurityjwt.security.jwt.JwtAuthenticationFilter;
 import com.springsecurityjwt.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,12 @@ public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthEntryPointJwt unauthorizedHandler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(AbstractHttpConfigurer::disable)
-
+                .exceptionHandling(ex->ex.authenticationEntryPoint(unauthorizedHandler))
                 .authorizeHttpRequests(request
                         ->request.requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .requestMatchers("/manage/**").permitAll()
